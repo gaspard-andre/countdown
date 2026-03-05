@@ -327,6 +327,40 @@
     </div>
   </div>
 
+  <div class="separator"></div>
+
+  <!-- BAR 3 — ends Sun 08 Mar 20:30 -->
+  <div class="bar-block">
+    <div class="bar-header">
+      <div class="bar-name" style="color:#ff6b6b90;">GETTING CRACKED</div>
+      <div class="bar-pct" style="color:#ff6b6b;text-shadow:0 0 20px #ff6b6b60;" id="pct3">0%</div>
+    </div>
+    <div class="progress-track" style="border:1px solid #ff6b6b30;clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));background:var(--mid);">
+      <div class="progress-fill" id="fill3" style="width:0%;background:linear-gradient(90deg,#ff6b6b40,#ff6b6bcc);clip-path:polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));"></div>
+    </div>
+    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label" style="color:#ff6b6b50;">Elapsed</div>
+        <div class="stat-value" style="color:#ff6b6b;" id="el3">—</div>
+      </div>
+      <div class="stat-divider" style="background:#ff6b6b20;align-self:stretch;"></div>
+      <div class="stat">
+        <div class="stat-label" style="color:#ff6b6b50;">Remaining</div>
+        <div class="stat-value" style="color:#ff6b6b;" id="rem3">—</div>
+      </div>
+      <div class="stat-divider" style="background:#ff6b6b20;align-self:stretch;"></div>
+      <div class="stat">
+        <div class="stat-label" style="color:#ff6b6b50;">ETA</div>
+        <div class="stat-value" style="color:#ff6b6b;" id="eta3">—</div>
+      </div>
+    </div>
+    <div class="dates" style="color:#ff6b6b40;">
+      <span>FRI 27 FEB · 14:30</span>
+      <span>SUN 08 MAR · 20:30</span>
+    </div>
+  </div>
+
   <div class="status-line">
     <span id="status-text">SYNCHRONISING</span><span class="cursor"></span>
   </div>
@@ -337,6 +371,7 @@
   const START = new Date('2026-02-27T14:30:00');
   const END1  = new Date('2026-03-08T16:00:00');
   const END2  = new Date('2026-03-08T10:00:00');
+  const END3  = new Date('2026-03-08T20:30:00');
 
   function fmt(ms) {
     if (ms <= 0) return 'DONE';
@@ -373,6 +408,7 @@
     const now = Date.now();
     updateBar(now, START, END1, 'fill1', 'pct1', 'el1', 'rem1', 'eta1');
     updateBar(now, START, END2, 'fill2', 'pct2', 'el2', 'rem2', 'eta2');
+    updateBar(now, START, END3, 'fill3', 'pct3', 'el3', 'rem3', 'eta3');
   }
 
   setInterval(() => {
