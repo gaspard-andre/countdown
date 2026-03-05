@@ -11,8 +11,7 @@
 
   :root {
     --green: #00ff88;
-    --green-dim: #00ff8840;
-    --green-glow: #00ff8820;
+    --blue: #00cfff;
     --bg: #020d06;
     --mid: #041a0c;
   }
@@ -27,25 +26,21 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 24px 16px;
   }
 
-  /* Scanlines */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 255, 136, 0.015) 2px,
-      rgba(0, 255, 136, 0.015) 4px
+      0deg, transparent, transparent 2px,
+      rgba(0,255,136,0.015) 2px, rgba(0,255,136,0.015) 4px
     );
     pointer-events: none;
     z-index: 10;
   }
 
-  /* Vignette */
   body::after {
     content: '';
     position: fixed;
@@ -62,15 +57,12 @@
     z-index: 1;
   }
 
-  /* Header */
   .header {
     text-align: center;
-    margin-bottom: 48px;
-    animation: fadeIn 1s ease forwards;
+    margin-bottom: 40px;
   }
 
   .label {
-    font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
     letter-spacing: 6px;
     color: #00ff8880;
@@ -93,28 +85,62 @@
     50% { text-shadow: 0 0 50px #00ff88aa, 0 0 100px #00ff8860; }
   }
 
-  /* Progress track */
-  .progress-wrap {
-    position: relative;
-    margin-bottom: 20px;
+  /* ── Bar block ── */
+  .bar-block {
+    margin-bottom: 40px;
   }
+
+  .bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .bar-name {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .bar-name.green { color: #00ff8890; }
+  .bar-name.blue  { color: #00cfff90; }
+
+  .bar-pct {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .bar-pct.green { color: var(--green); text-shadow: 0 0 20px #00ff8860; }
+  .bar-pct.blue  { color: var(--blue);  text-shadow: 0 0 20px #00cfff60; }
 
   .progress-track {
     width: 100%;
-    height: 28px;
+    height: 24px;
     background: var(--mid);
-    border: 1px solid #00ff8830;
     position: relative;
     overflow: hidden;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
+
+  .progress-track.green { border: 1px solid #00ff8830; }
+  .progress-track.blue  { border: 1px solid #00cfff30; }
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #00ff8840, #00ff88cc);
     position: relative;
     transition: width 1s linear;
-    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  }
+
+  .progress-fill.green {
+    background: linear-gradient(90deg, #00ff8840, #00ff88cc);
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+  }
+
+  .progress-fill.blue {
+    background: linear-gradient(90deg, #00cfff40, #00cfffcc);
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
   }
 
   .progress-fill::after {
@@ -122,11 +148,12 @@
     position: absolute;
     top: 0; right: 0; bottom: 0;
     width: 40px;
-    background: linear-gradient(90deg, transparent, #00ff88ff);
     filter: blur(4px);
   }
 
-  /* Shimmer sweep */
+  .progress-fill.green::after { background: linear-gradient(90deg, transparent, #00ff88ff); }
+  .progress-fill.blue::after  { background: linear-gradient(90deg, transparent, #00cfffff); }
+
   .progress-fill::before {
     content: '';
     position: absolute;
@@ -141,106 +168,79 @@
     100% { left: 110%; }
   }
 
-  /* Corner decorators */
-  .track-corner {
-    position: absolute;
-    width: 8px; height: 8px;
-    background: var(--green);
-    opacity: 0.7;
-  }
-  .track-corner.tl { top: -1px; left: -1px; }
-  .track-corner.br { bottom: -1px; right: -1px; }
-
-  /* Tick marks */
   .ticks {
     display: flex;
     justify-content: space-between;
     padding: 0 2px;
-    margin-top: 6px;
-    opacity: 0.35;
+    margin-top: 5px;
+    opacity: 0.3;
     font-size: 9px;
     letter-spacing: 1px;
   }
 
-  /* Percentage display */
-  .percent-display {
-    text-align: center;
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(48px, 10vw, 80px);
-    font-weight: 700;
-    color: var(--green);
-    text-shadow: 0 0 40px #00ff8880;
-    letter-spacing: 2px;
-    margin: 32px 0;
-    line-height: 1;
-  }
-
-  .percent-display span {
-    font-size: 0.45em;
-    vertical-align: super;
-    opacity: 0.7;
-  }
-
-  /* Stats row */
+  /* Stats */
   .stats {
     display: grid;
     grid-template-columns: 1fr 1px 1fr 1px 1fr;
-    gap: 0;
-    border: 1px solid #00ff8820;
-    margin-top: 36px;
-    animation: fadeIn 1.5s ease forwards;
+    margin-top: 10px;
   }
 
-  .stat {
-    padding: 16px 12px;
-    text-align: center;
-  }
+  .stat { padding: 10px 8px; text-align: center; }
 
-  .stat-divider {
-    background: #00ff8820;
-    align-self: stretch;
-  }
+  .stat-divider.green { background: #00ff8820; align-self: stretch; }
+  .stat-divider.blue  { background: #00cfff20; align-self: stretch; }
 
   .stat-label {
-    font-size: 9px;
+    font-size: 8px;
     letter-spacing: 3px;
-    color: #00ff8850;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
+
+  .stat-label.green { color: #00ff8850; }
+  .stat-label.blue  { color: #00cfff50; }
 
   .stat-value {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(13px, 2.5vw, 17px);
+    font-size: clamp(11px, 2vw, 14px);
     font-weight: 700;
-    color: var(--green);
   }
 
-  /* Date anchors */
+  .stat-value.green { color: var(--green); }
+  .stat-value.blue  { color: var(--blue);  }
+
   .dates {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 2px;
-    color: #00ff8845;
-    margin-top: 14px;
+    margin-top: 8px;
     padding: 0 2px;
   }
 
-  /* Status line */
+  .dates.green { color: #00ff8840; }
+  .dates.blue  { color: #00cfff40; }
+
+  /* Divider between blocks */
+  .separator {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff8820, #00cfff20, transparent);
+    margin: 8px 0 40px;
+  }
+
+  /* Status */
   .status-line {
-    margin-top: 32px;
+    margin-top: 8px;
     font-size: 11px;
     letter-spacing: 2px;
     color: #00ff8855;
     text-align: center;
-    height: 16px;
   }
 
   .cursor {
     display: inline-block;
-    width: 8px;
-    height: 12px;
+    width: 8px; height: 12px;
     background: var(--green);
     margin-left: 4px;
     vertical-align: middle;
@@ -251,77 +251,95 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Done state */
-  .done-flash {
-    animation: done-pulse 0.5s ease 3;
-  }
-
-  @keyframes done-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
 </style>
 </head>
 <body>
-
 <div class="container">
+
   <div class="header">
     <div class="label">System Status</div>
     <div class="title">LOADING</div>
   </div>
 
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-fill" id="fill"></div>
-      <div class="track-corner tl"></div>
-      <div class="track-corner br"></div>
+  <!-- BAR 1 — ends Sun 08 Mar 16:00 -->
+  <div class="bar-block">
+    <div class="bar-header">
+      <div class="bar-name green">IF WE MEET BEFORE THE TRAIN</div>
+      <div class="bar-pct green" id="pct1">0%</div>
     </div>
-    <div class="ticks">
-      <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+    <div class="progress-track green">
+      <div class="progress-fill green" id="fill1" style="width:0%"></div>
+    </div>
+    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label green">Elapsed</div>
+        <div class="stat-value green" id="el1">—</div>
+      </div>
+      <div class="stat-divider green"></div>
+      <div class="stat">
+        <div class="stat-label green">Remaining</div>
+        <div class="stat-value green" id="rem1">—</div>
+      </div>
+      <div class="stat-divider green"></div>
+      <div class="stat">
+        <div class="stat-label green">ETA</div>
+        <div class="stat-value green" id="eta1">—</div>
+      </div>
+    </div>
+    <div class="dates green">
+      <span>FRI 27 FEB · 14:30</span>
+      <span>SUN 08 MAR · 16:00</span>
     </div>
   </div>
 
-  <div class="percent-display" id="pct">0<span>%</span></div>
+  <div class="separator"></div>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-label">Elapsed</div>
-      <div class="stat-value" id="elapsed">—</div>
+  <!-- BAR 2 — ends Sun 08 Mar 10:00 -->
+  <div class="bar-block">
+    <div class="bar-header">
+      <div class="bar-name blue">IF WE MEET FOR BREAKFAST</div>
+      <div class="bar-pct blue" id="pct2">0%</div>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <div class="stat-label">Remaining</div>
-      <div class="stat-value" id="remaining">—</div>
+    <div class="progress-track blue">
+      <div class="progress-fill blue" id="fill2" style="width:0%"></div>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <div class="stat-label">ETA</div>
-      <div class="stat-value" id="eta">—</div>
+    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label blue">Elapsed</div>
+        <div class="stat-value blue" id="el2">—</div>
+      </div>
+      <div class="stat-divider blue"></div>
+      <div class="stat">
+        <div class="stat-label blue">Remaining</div>
+        <div class="stat-value blue" id="rem2">—</div>
+      </div>
+      <div class="stat-divider blue"></div>
+      <div class="stat">
+        <div class="stat-label blue">ETA</div>
+        <div class="stat-value blue" id="eta2">—</div>
+      </div>
+    </div>
+    <div class="dates blue">
+      <span>FRI 27 FEB · 14:30</span>
+      <span>SUN 08 MAR · 10:00</span>
     </div>
   </div>
 
-  <div class="dates">
-    <span>FRI 27 FEB · 14:30</span>
-    <span>SUN 08 MAR · 16:00</span>
+  <div class="status-line">
+    <span id="status-text">SYNCHRONISING</span><span class="cursor"></span>
   </div>
 
-  <div class="status-line" id="status">
-    <span id="status-text">INITIALISING</span><span class="cursor"></span>
-  </div>
 </div>
 
 <script>
   const START = new Date('2026-02-27T14:30:00');
-  const END   = new Date('2026-03-08T16:00:00');
+  const END1  = new Date('2026-03-08T16:00:00');
+  const END2  = new Date('2026-03-08T10:00:00');
 
   function fmt(ms) {
-    if (ms <= 0) return '00:00:00';
+    if (ms <= 0) return 'DONE';
     const s = Math.floor(ms / 1000);
     const d = Math.floor(s / 86400);
     const h = Math.floor((s % 86400) / 3600);
@@ -332,57 +350,36 @@
   }
 
   function fmtETA(date) {
-    return date.toLocaleString('en-GB', {
-      month: 'short', day: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
+    return date.toLocaleString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
   }
 
-  const statuses = [
-    'RUNNING CALCULATIONS',
-    'PROCESSING SEQUENCE',
-    'SYNCHRONISING DATA',
-    'CALIBRATING OUTPUT',
-    'VALIDATING PARAMETERS',
-  ];
-  let statusIdx = 0;
+  function updateBar(now, start, end, fillId, pctId, elId, remId, etaId) {
+    const total = end - start;
+    const done  = now - start;
+    const raw   = Math.max(0, Math.min(1, done / total));
+    const pct   = (raw * 100).toFixed(1);
+
+    document.getElementById(fillId).style.width = pct + '%';
+    document.getElementById(pctId).textContent  = Math.floor(raw * 100) + '%';
+    document.getElementById(elId).textContent   = fmt(Math.max(0, now - start));
+    document.getElementById(remId).textContent  = fmt(Math.max(0, end - now));
+    document.getElementById(etaId).textContent  = fmtETA(end);
+  }
+
+  const statuses = ['SYNCHRONISING','PROCESSING','CALIBRATING','VALIDATING','RUNNING'];
+  let si = 0;
 
   function update() {
-    const now  = Date.now();
-    const total = END - START;
-    const done  = now - START;
-    const raw   = Math.max(0, Math.min(1, done / total));
-    const pct   = (raw * 100).toFixed(2);
-
-    document.getElementById('fill').style.width = pct + '%';
-    document.getElementById('pct').innerHTML = Math.floor(raw * 100) + '<span>%</span>';
-
-    const elapsed   = Math.max(0, now - START);
-    const remaining = Math.max(0, END - now);
-
-    document.getElementById('elapsed').textContent   = fmt(elapsed);
-    document.getElementById('remaining').textContent = fmt(remaining);
-    document.getElementById('eta').textContent       = fmtETA(END);
-
-    if (raw >= 1) {
-      document.getElementById('status-text').textContent = 'COMPLETE';
-      document.getElementById('pct').classList.add('done-flash');
-      return;
-    }
-
-    if (now < START) {
-      document.getElementById('status-text').textContent = 'AWAITING START';
-    }
+    const now = Date.now();
+    updateBar(now, START, END1, 'fill1', 'pct1', 'el1', 'rem1', 'eta1');
+    updateBar(now, START, END2, 'fill2', 'pct2', 'el2', 'rem2', 'eta2');
   }
 
-  // Rotate status messages
   setInterval(() => {
-    statusIdx = (statusIdx + 1) % statuses.length;
+    si = (si + 1) % statuses.length;
     const el = document.getElementById('status-text');
-    if (el.textContent !== 'COMPLETE' && el.textContent !== 'AWAITING START') {
-      el.textContent = statuses[statusIdx];
-    }
-  }, 3200);
+    if (el.textContent !== 'COMPLETE') el.textContent = statuses[si];
+  }, 3000);
 
   update();
   setInterval(update, 1000);
