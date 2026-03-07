@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loading...</title>
+<title>If we meet for breakfast</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --green: #00ff88;
     --blue: #00cfff;
     --bg: #020d06;
     --mid: #041a0c;
@@ -18,7 +17,7 @@
 
   body {
     background: var(--bg);
-    color: var(--green);
+    color: var(--blue);
     font-family: 'Share Tech Mono', monospace;
     min-height: 100vh;
     display: flex;
@@ -35,7 +34,7 @@
     inset: 0;
     background: repeating-linear-gradient(
       0deg, transparent, transparent 2px,
-      rgba(0,255,136,0.015) 2px, rgba(0,255,136,0.015) 4px
+      rgba(0,207,255,0.015) 2px, rgba(0,207,255,0.015) 4px
     );
     pointer-events: none;
     z-index: 10;
@@ -57,89 +56,35 @@
     z-index: 1;
   }
 
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .label {
-    font-size: 11px;
-    letter-spacing: 6px;
-    color: #00ff8880;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  .title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(28px, 5vw, 44px);
-    font-weight: 900;
-    letter-spacing: 4px;
-    color: var(--green);
-    text-shadow: 0 0 30px #00ff8860, 0 0 60px #00ff8830;
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { text-shadow: 0 0 30px #00ff8860, 0 0 60px #00ff8830; }
-    50% { text-shadow: 0 0 50px #00ff88aa, 0 0 100px #00ff8860; }
-  }
-
-  /* ── Bar block ── */
-  .bar-block {
-    margin-bottom: 40px;
-  }
-
   .bar-header {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: flex-end;
     margin-bottom: 10px;
   }
-
-  .bar-name {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-
-  .bar-name.green { color: #00ff8890; }
-  .bar-name.blue  { color: #00cfff90; }
 
   .bar-pct {
     font-family: 'Orbitron', sans-serif;
     font-size: 22px;
     font-weight: 700;
+    color: var(--blue);
+    text-shadow: 0 0 20px #00cfff60;
   }
-
-  .bar-pct.green { color: var(--green); text-shadow: 0 0 20px #00ff8860; }
-  .bar-pct.blue  { color: var(--blue);  text-shadow: 0 0 20px #00cfff60; }
 
   .progress-track {
     width: 100%;
     height: 24px;
     background: var(--mid);
+    border: 1px solid #00cfff30;
     position: relative;
     overflow: hidden;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
 
-  .progress-track.green { border: 1px solid #00ff8830; }
-  .progress-track.blue  { border: 1px solid #00cfff30; }
-
   .progress-fill {
     height: 100%;
+    background: linear-gradient(90deg, #00cfff40, #00cfffcc);
     position: relative;
     transition: width 1s linear;
-  }
-
-  .progress-fill.green {
-    background: linear-gradient(90deg, #00ff8840, #00ff88cc);
-    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
-  }
-
-  .progress-fill.blue {
-    background: linear-gradient(90deg, #00cfff40, #00cfffcc);
     clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
   }
 
@@ -148,11 +93,9 @@
     position: absolute;
     top: 0; right: 0; bottom: 0;
     width: 40px;
+    background: linear-gradient(90deg, transparent, #00cfffff);
     filter: blur(4px);
   }
-
-  .progress-fill.green::after { background: linear-gradient(90deg, transparent, #00ff88ff); }
-  .progress-fill.blue::after  { background: linear-gradient(90deg, transparent, #00cfffff); }
 
   .progress-fill::before {
     content: '';
@@ -178,7 +121,6 @@
     letter-spacing: 1px;
   }
 
-  /* Stats */
   .stats {
     display: grid;
     grid-template-columns: 1fr 1px 1fr 1px 1fr;
@@ -186,28 +128,22 @@
   }
 
   .stat { padding: 10px 8px; text-align: center; }
-
-  .stat-divider.green { background: #00ff8820; align-self: stretch; }
-  .stat-divider.blue  { background: #00cfff20; align-self: stretch; }
+  .stat-divider { background: #00cfff20; align-self: stretch; }
 
   .stat-label {
     font-size: 8px;
     letter-spacing: 3px;
     text-transform: uppercase;
+    color: #00cfff50;
     margin-bottom: 4px;
   }
-
-  .stat-label.green { color: #00ff8850; }
-  .stat-label.blue  { color: #00cfff50; }
 
   .stat-value {
     font-family: 'Orbitron', sans-serif;
     font-size: clamp(11px, 2vw, 14px);
     font-weight: 700;
+    color: var(--blue);
   }
-
-  .stat-value.green { color: var(--green); }
-  .stat-value.blue  { color: var(--blue);  }
 
   .dates {
     display: flex;
@@ -216,32 +152,21 @@
     letter-spacing: 2px;
     margin-top: 8px;
     padding: 0 2px;
+    color: #00cfff40;
   }
 
-  .dates.green { color: #00ff8840; }
-  .dates.blue  { color: #00cfff40; }
-
-  /* Divider between blocks */
-  .separator {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00ff8820, #00cfff20, transparent);
-    margin: 8px 0 40px;
-  }
-
-  /* Status */
   .status-line {
-    margin-top: 8px;
+    margin-top: 24px;
     font-size: 11px;
     letter-spacing: 2px;
-    color: #00ff8855;
+    color: #00cfff55;
     text-align: center;
   }
 
   .cursor {
     display: inline-block;
     width: 8px; height: 12px;
-    background: var(--green);
+    background: var(--blue);
     margin-left: 4px;
     vertical-align: middle;
     animation: blink 1s step-end infinite;
@@ -256,109 +181,35 @@
 <body>
 <div class="container">
 
-  <div class="header">
-    <div class="label">System Status</div>
-    <div class="title">LOADING</div>
+  <div class="bar-header">
+    <div class="bar-pct" id="pct">0%</div>
   </div>
 
-  <!-- BAR 1 — ends Sun 08 Mar 16:00 -->
-  <div class="bar-block">
-    <div class="bar-header">
-      <div class="bar-name green">IF WE MEET BEFORE THE TRAIN</div>
-      <div class="bar-pct green" id="pct1">0%</div>
+  <div class="progress-track">
+    <div class="progress-fill" id="fill" style="width:0%"></div>
+  </div>
+  <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Elapsed</div>
+      <div class="stat-value" id="el">—</div>
     </div>
-    <div class="progress-track green">
-      <div class="progress-fill green" id="fill1" style="width:0%"></div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-label">Remaining</div>
+      <div class="stat-value" id="rem">—</div>
     </div>
-    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-label green">Elapsed</div>
-        <div class="stat-value green" id="el1">—</div>
-      </div>
-      <div class="stat-divider green"></div>
-      <div class="stat">
-        <div class="stat-label green">Remaining</div>
-        <div class="stat-value green" id="rem1">—</div>
-      </div>
-      <div class="stat-divider green"></div>
-      <div class="stat">
-        <div class="stat-label green">ETA</div>
-        <div class="stat-value green" id="eta1">—</div>
-      </div>
-    </div>
-    <div class="dates green">
-      <span>FRI 27 FEB · 14:30</span>
-      <span>SUN 08 MAR · 16:00</span>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-label">ETA</div>
+      <div class="stat-value" id="eta">—</div>
     </div>
   </div>
 
-  <div class="separator"></div>
-
-  <!-- BAR 2 — ends Sun 08 Mar 10:00 -->
-  <div class="bar-block">
-    <div class="bar-header">
-      <div class="bar-name blue">IF WE MEET FOR BREAKFAST</div>
-      <div class="bar-pct blue" id="pct2">0%</div>
-    </div>
-    <div class="progress-track blue">
-      <div class="progress-fill blue" id="fill2" style="width:0%"></div>
-    </div>
-    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-label blue">Elapsed</div>
-        <div class="stat-value blue" id="el2">—</div>
-      </div>
-      <div class="stat-divider blue"></div>
-      <div class="stat">
-        <div class="stat-label blue">Remaining</div>
-        <div class="stat-value blue" id="rem2">—</div>
-      </div>
-      <div class="stat-divider blue"></div>
-      <div class="stat">
-        <div class="stat-label blue">ETA</div>
-        <div class="stat-value blue" id="eta2">—</div>
-      </div>
-    </div>
-    <div class="dates blue">
-      <span>FRI 27 FEB · 14:30</span>
-      <span>SUN 08 MAR · 10:00</span>
-    </div>
-  </div>
-
-  <div class="separator"></div>
-
-  <!-- BAR 3 — ends Sun 08 Mar 20:30 -->
-  <div class="bar-block">
-    <div class="bar-header">
-      <div class="bar-name" style="color:#ff6b6b90;">GETTING CRACKED</div>
-      <div class="bar-pct" style="color:#ff6b6b;text-shadow:0 0 20px #ff6b6b60;" id="pct3">0%</div>
-    </div>
-    <div class="progress-track" style="border:1px solid #ff6b6b30;clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));background:var(--mid);">
-      <div class="progress-fill" id="fill3" style="width:0%;background:linear-gradient(90deg,#ff6b6b40,#ff6b6bcc);clip-path:polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));"></div>
-    </div>
-    <div class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-label" style="color:#ff6b6b50;">Elapsed</div>
-        <div class="stat-value" style="color:#ff6b6b;" id="el3">—</div>
-      </div>
-      <div class="stat-divider" style="background:#ff6b6b20;align-self:stretch;"></div>
-      <div class="stat">
-        <div class="stat-label" style="color:#ff6b6b50;">Remaining</div>
-        <div class="stat-value" style="color:#ff6b6b;" id="rem3">—</div>
-      </div>
-      <div class="stat-divider" style="background:#ff6b6b20;align-self:stretch;"></div>
-      <div class="stat">
-        <div class="stat-label" style="color:#ff6b6b50;">ETA</div>
-        <div class="stat-value" style="color:#ff6b6b;" id="eta3">—</div>
-      </div>
-    </div>
-    <div class="dates" style="color:#ff6b6b40;">
-      <span>FRI 27 FEB · 14:30</span>
-      <span>SUN 08 MAR · 20:30</span>
-    </div>
+  <div class="dates">
+    <span>FRI 27 FEB · 14:30</span>
+    <span>SUN 08 MAR · 11:00</span>
   </div>
 
   <div class="status-line">
@@ -369,9 +220,7 @@
 
 <script>
   const START = new Date('2026-02-27T14:30:00');
-  const END1  = new Date('2026-03-08T16:00:00');
-  const END2  = new Date('2026-03-08T10:00:00');
-  const END3  = new Date('2026-03-08T20:30:00');
+  const END   = new Date('2026-03-08T11:00:00');
 
   function fmt(ms) {
     if (ms <= 0) return 'DONE';
@@ -388,29 +237,22 @@
     return date.toLocaleString('en-GB', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
   }
 
-  function updateBar(now, start, end, fillId, pctId, elId, remId, etaId) {
-    const total = end - start;
-    const done  = now - start;
-    const raw   = Math.max(0, Math.min(1, done / total));
-    const pct   = (raw * 100).toFixed(1);
+  function update() {
+    const now   = Date.now();
+    const total = END - START;
+    const raw   = Math.max(0, Math.min(1, (now - START) / total));
 
-    document.getElementById(fillId).style.width = pct + '%';
-    document.getElementById(pctId).textContent  = Math.floor(raw * 100) + '%';
-    document.getElementById(elId).textContent   = fmt(Math.max(0, now - start));
-    document.getElementById(remId).textContent  = fmt(Math.max(0, end - now));
-    document.getElementById(etaId).textContent  = fmtETA(end);
+    document.getElementById('fill').style.width = (raw * 100).toFixed(2) + '%';
+    document.getElementById('pct').textContent  = Math.floor(raw * 100) + '%';
+    document.getElementById('el').textContent   = fmt(Math.max(0, now - START));
+    document.getElementById('rem').textContent  = fmt(Math.max(0, END - now));
+    document.getElementById('eta').textContent  = fmtETA(END);
+
+    if (raw >= 1) document.getElementById('status-text').textContent = 'COMPLETE';
   }
 
   const statuses = ['SYNCHRONISING','PROCESSING','CALIBRATING','VALIDATING','RUNNING'];
   let si = 0;
-
-  function update() {
-    const now = Date.now();
-    updateBar(now, START, END1, 'fill1', 'pct1', 'el1', 'rem1', 'eta1');
-    updateBar(now, START, END2, 'fill2', 'pct2', 'el2', 'rem2', 'eta2');
-    updateBar(now, START, END3, 'fill3', 'pct3', 'el3', 'rem3', 'eta3');
-  }
-
   setInterval(() => {
     si = (si + 1) % statuses.length;
     const el = document.getElementById('status-text');
